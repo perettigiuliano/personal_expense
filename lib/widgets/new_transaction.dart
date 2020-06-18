@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:personal_expense/widgets/adaptive/flat_button.dart';
 
 class NewTransaction extends StatefulWidget {
   final Function _newTransactionHandler;
@@ -59,69 +60,76 @@ class _NewTransactionState extends State<NewTransaction> {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 5,
-      child: Container(
-        margin: EdgeInsets.all(10),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.end,
-          children: <Widget>[
-            TextField(
-              onSubmitted: newTransaction,
-              controller: _trxTitleController,
-              decoration: InputDecoration(labelText: "Title:"),
-              onChanged: (value) {
-                isSaveEnabled();
-              },
-            ),
-            TextField(
-              onSubmitted: newTransaction,
-              keyboardType: TextInputType.number,
-              controller: _trxAmountController,
-              decoration: InputDecoration(labelText: "Amount:"),
-              onChanged: (value) {
-                isSaveEnabled();
-              },
-            ),
-            Container(
-              height: 70,
-              child: Row(
-                children: <Widget>[
-                  Expanded(
-                    child: TextField(
-                      readOnly: true,
-                      onSubmitted: newTransaction,
-                      keyboardType: TextInputType.datetime,
-                      controller: _trxDateController,
-                      decoration: InputDecoration(labelText: "Date:"),
-                      onChanged: (value) {
-                        isSaveEnabled();
-                      },
+    return SingleChildScrollView(
+      child: Card(
+        elevation: 5,
+        child: Container(
+          margin: EdgeInsets.only(
+              top: 10,
+              left: 10,
+              right: 10,
+              bottom: MediaQuery.of(context).viewInsets.bottom + 10),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: <Widget>[
+              TextField(
+                onSubmitted: newTransaction,
+                controller: _trxTitleController,
+                decoration: InputDecoration(labelText: "Title:"),
+                onChanged: (value) {
+                  isSaveEnabled();
+                },
+              ),
+              TextField(
+                onSubmitted: newTransaction,
+                keyboardType: TextInputType.number,
+                controller: _trxAmountController,
+                decoration: InputDecoration(labelText: "Amount:"),
+                onChanged: (value) {
+                  isSaveEnabled();
+                },
+              ),
+              Container(
+                height: 70,
+                child: Row(
+                  children: <Widget>[
+                    Expanded(
+                      child: TextField(
+                        readOnly: true,
+                        onSubmitted: newTransaction,
+                        keyboardType: TextInputType.datetime,
+                        controller: _trxDateController,
+                        decoration: InputDecoration(labelText: "Date:"),
+                        onChanged: (value) {
+                          isSaveEnabled();
+                        },
+                      ),
                     ),
-                  ),
-                  RaisedButton(
-                    color: Colors.white,
-                    textColor: Colors.red,
-                    onPressed: () {
-                      _showDatePicker();
-                    },
-                    child: Text('Choose'),
-                  )
-                ],
-              ),
-            ),
-            Container(
-              margin: EdgeInsets.only(top: 10, right: 10),
-              child: RaisedButton(
-                child: Text(
-                  "Save",
+                    AdaptiveFlatButton("Choose", _showDatePicker),
+                    // FlatButton(
+                    //   color: Colors.white,
+                    //   textColor: Colors.red,
+                    //   onPressed: () {
+                    //     _showDatePicker();
+                    //   },
+                    //   child: Text('Choose'),
+                    // )
+                  ],
                 ),
-                color: Theme.of(context).primaryColor,
-                textColor: Theme.of(context).textTheme.button.color,
-                onPressed: _isSaveButtonEnabled ? newTransaction : null,
               ),
-            )
-          ],
+              Container(
+                margin: EdgeInsets.only(top: 10, right: 10),
+                child: RaisedButton(
+                  child: Text(
+                    "Save",
+                  ),
+                  color: Theme.of(context).primaryColor,
+                  textColor: Theme.of(context).textTheme.button.color,
+                  onPressed: _isSaveButtonEnabled ? newTransaction : null,
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:personal_expense/utils/utils.dart';
 import '../models/transaction.dart';
 import 'transaction-card.dart';
 
@@ -19,26 +20,28 @@ class TransactionList extends StatelessWidget {
         scrollDirection: Axis.vertical,
       );
     } else {
-      return Column(
-        children: <Widget>[
-          SizedBox(
-            height: 10,
-          ),
-          Text(
-            "No transactions",
-            style: Theme.of(context).textTheme.title,
-          ),
-          SizedBox(
-            height: 50,
-          ),
-          Container(
-              height: 300,
-              child: Image.asset(
-                "assets/images/waiting.png",
-                fit: BoxFit.cover,
-              )),
-        ],
-      );
+      return LayoutBuilder(builder: (context, constraints) {
+        return Column(
+          children: <Widget>[
+            SizedBox(
+              height: 10,
+            ),
+            Text(
+              "No transactions",
+              style: Theme.of(context).textTheme.title,
+            ),
+            SizedBox(
+              height: 50,
+            ),
+            Container(
+                height: Utils.calculateHeight(constraints, 0.6),
+                child: Image.asset(
+                  "assets/images/waiting.png",
+                  fit: BoxFit.cover,
+                )),
+          ],
+        );
+      });
     }
   }
 

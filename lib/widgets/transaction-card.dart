@@ -13,6 +13,7 @@ class TransactionCard extends StatelessWidget {
   Widget build(BuildContext context) {
     // final numberFormat = NumberFormat("#,##0.00", "it_IT");
     final numberFormat = NumberFormat.simpleCurrency();
+    final double appWidth = MediaQuery.of(context).size.width;
     return Card(
       elevation: 2,
       margin: EdgeInsets.fromLTRB(10, 5, 10, 5),
@@ -36,15 +37,26 @@ class TransactionCard extends StatelessWidget {
               fontWeight: FontWeight.bold,
               fontStyle: FontStyle.italic),
         ),
-        trailing: IconButton(
-          icon: Icon(
-            Icons.remove_circle_outline,
-            color: Theme.of(context).errorColor,
-          ),
-          onPressed: () {
-            _deleteTransactionHandler(this.trx);
-          },
-        ),
+        trailing: appWidth > 460
+            ? FlatButton.icon(
+                textColor: Theme.of(context).errorColor,
+                onPressed: () {
+                  _deleteTransactionHandler(this.trx);
+                },
+                icon: Icon(
+                  Icons.remove_circle_outline,
+                  color: Theme.of(context).errorColor,
+                ),
+                label: Text("Delete"))
+            : IconButton(
+                icon: Icon(
+                  Icons.remove_circle_outline,
+                  color: Theme.of(context).errorColor,
+                ),
+                onPressed: () {
+                  _deleteTransactionHandler(this.trx);
+                },
+              ),
       ),
     );
   }
