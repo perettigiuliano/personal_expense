@@ -16,12 +16,12 @@ class TransactionCard extends StatelessWidget {
     final double appWidth = MediaQuery.of(context).size.width;
     return Card(
       elevation: 2,
-      margin: EdgeInsets.fromLTRB(10, 5, 10, 5),
+      margin: const EdgeInsets.fromLTRB(10, 5, 10, 5),
       child: ListTile(
         leading: CircleAvatar(
           radius: 30,
           child: Padding(
-              padding: EdgeInsets.all(5),
+              padding: const EdgeInsets.all(5),
               child:
                   FittedBox(child: Text(numberFormat.format(this.trx.amount)))),
         ),
@@ -47,7 +47,7 @@ class TransactionCard extends StatelessWidget {
                   Icons.remove_circle_outline,
                   color: Theme.of(context).errorColor,
                 ),
-                label: Text("Delete"))
+                label: const Text("Delete"))
             : IconButton(
                 icon: Icon(
                   Icons.remove_circle_outline,
